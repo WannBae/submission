@@ -1,5 +1,7 @@
 const {nanoid}=require('nanoid');
 const book=require('./books');
+
+
 const getAllBookHandler = (request, h) => {
     const { name, reading, finished } = request.query;
         let filteredBooks = book;
@@ -12,7 +14,7 @@ const getAllBookHandler = (request, h) => {
     if (finished !== undefined) {
       filteredBooks = filteredBooks.filter(book => book.finished === (finished === '1'));
     }
-    
+
     const bookList = filteredBooks.map(({ id, name, publisher }) => ({ id, name, publisher }));
     const response = {
       status: 'success',
@@ -23,7 +25,7 @@ const getAllBookHandler = (request, h) => {
     return response;
   };
   
-  const addBookHandler=(request,h)=>{
+const addBookHandler=(request,h)=>{
     const{name,year,author,summary,publisher,pageCount,readPage,reading}=request.payload;
     if(!name){
         const response=h.response({
@@ -69,7 +71,7 @@ const getAllBookHandler = (request, h) => {
 
 const getBookByIdHandler = (request, h) => {
     const { bookId } = request.params;
-    const selectedBook = book.find((b) => b.id === bookId);
+    const selectedBook = books.find((book) => book.id === bookId);
     if (!selectedBook) {
         const response = h.response({
             status: 'fail',
