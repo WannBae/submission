@@ -1,4 +1,4 @@
-const {addBookHandler, getAllBookHandler, getBookByIdHandler, editBookByIdHandler, deleteBookByidHandler }=require('./handler');
+const {addBookHandler, getAllBookHandler, getBookByIdHandler, editBookByIdHandler, deleteBookByIdHandler }=require('./handler');
 const routes=[{
     method:'POST',
     path:'/books',
@@ -22,7 +22,7 @@ const routes=[{
 {
     method:'DELETE',
     path:'/books/{bookId}',
-    handler:deleteBookByidHandler,
+    handler:deleteBookByIdHandler,
 }
 ];
 module.exports=routes;
