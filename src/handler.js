@@ -1,6 +1,5 @@
 const {nanoid}=require('nanoid');
 const book=require('./books');
-const books = require('./books');
 const getAllBookHandler=()=>{
     const response ={
     status:'success',
