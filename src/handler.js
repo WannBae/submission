@@ -1,14 +1,15 @@
 const {nanoid}=require('nanoid');
 const book=require('./books');
-const getAllBookHandler=()=>{
-    const response ={
-    status:'success',
-     data:{
-        books:book.length>0?book:[],
-     }
-    }
+const getAllBookHandler = () => {
+    const books = book.map(({id, name, publisher}) => ({id, name, publisher}));
+    const response = {
+      status: 'success',
+      data: {
+        books: books.length > 1 ? books.slice(0, 2) : books,
+      },
+    };
     return response;
-};
+  };
 const addBookHandler=(request,h)=>{
     const{name,year,author,summary,publisher,pageCount,readPage,reading}=request.payload;
     if(!name){
@@ -26,14 +27,10 @@ const addBookHandler=(request,h)=>{
     const newBook={id,name,year,author,summary,publisher,pageCount,readPage,finished,reading,insertedAt,updatedAt};
     book.push(newBook);
     const isSuccess = book.filter(book => book.id === id).length > 0;
-    //Kemudian, kita gunakan isSuccess untuk menentukan respons yang diberikan server. Jika isSuccess bernilai true, maka beri respons berhasil. Jika false, maka beri respons gagal.
     if(isSuccess){
         const response=h.response({
             status:'success',
             message:'Buku berhasil ditambahkan',
-            data:{
-                bookId:id,
-            },
         });
         response.code(201);
         return response;
@@ -42,7 +39,7 @@ const addBookHandler=(request,h)=>{
         status:'fail',
         message:'Buku gagal ditambahkan',
     });
-    response.code(500);
+    response.code(400);
     return response;
 };
 const getBookByIdHandler=(request,h)=>{
