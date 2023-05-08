@@ -1,4 +1,4 @@
-const {addBookHandler, getAllBookHandler, getBookByIdHandler, editBookByHandler, deleteBookByidHandler }=require('./handler');
+const {addBookHandler, getAllBookHandler, getBookByIdHandler, editBookByIdHandler, deleteBookByidHandler }=require('./handler');
 const routes=[{
     method:'POST',
     path:'/books',
@@ -17,7 +17,7 @@ const routes=[{
 {
     method:'PUT',
     path:'/books/{bookId}',
-    handler:editBookByHandler,
+    handler:editBookByIdHandler,
 },
 {
     method:'DELETE',
