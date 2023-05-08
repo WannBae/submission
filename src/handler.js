@@ -71,7 +71,7 @@ const addBookHandler=(request,h)=>{
 
 const getBookByIdHandler = (request, h) => {
     const { bookId } = request.params;
-    const selectedBook = books.find((book) => book.id === bookId);
+    const selectedBook = book.find((book) => book.id === bookId);
     if (!selectedBook) {
         const response = h.response({
             status: 'fail',
