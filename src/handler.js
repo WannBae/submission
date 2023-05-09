@@ -4,7 +4,7 @@ const book=require('./books');
 
 const getAllBookHandler = (request, h) => {
     const { name, reading, finished } = request.query;
-        let filteredBooks = book;
+    let filteredBooks = book;
     if (name) {
       filteredBooks = filteredBooks.filter(book => book.name.toLowerCase().includes(name.toLowerCase()));
     }
@@ -14,16 +14,17 @@ const getAllBookHandler = (request, h) => {
     if (finished !== undefined) {
       filteredBooks = filteredBooks.filter(book => book.finished === (finished === '1'));
     }
-
+  
     const bookList = filteredBooks.map(({ id, name, publisher }) => ({ id, name, publisher }));
     const response = {
       status: 'success',
       data: {
-        books: bookList.length > 3 ? bookList.slice(0, 3) : bookList,
+        books: bookList,
       },
     };
     return response;
   };
+  
   
 const addBookHandler=(request,h)=>{
     const{name,year,author,summary,publisher,pageCount,readPage,reading}=request.payload;
